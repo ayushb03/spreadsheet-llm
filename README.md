@@ -14,7 +14,7 @@ A production-grade Python package for processing and analyzing Excel spreadsheet
 ## Installation
 
 ```bash
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 
@@ -32,10 +32,25 @@ pip install -r requirements.txt
 ### Basic Processing
 
 ```python
-from excel_processor import ExcelProcessor
-
-processor = ExcelProcessor('path/to/your/spreadsheet.xlsx')
-processor.process()
+if __name__ == "__main__":
+    try:
+        start_time = time.time()
+        file_path = "example.xlsx"
+        logger.info(f"Starting processing of {file_path}")
+        
+        pipeline = ExcelPipeline(file_path)
+        result = pipeline.run_pipeline()
+        
+        end_time = time.time()
+        total_time = end_time - start_time
+        logger.info(f"Processing completed successfully in {total_time:.2f} seconds")
+        print(result)
+        
+    except Exception as e:
+        end_time = time.time()
+        total_time = end_time - start_time
+        logger.critical(f"Critical error after {total_time:.2f} seconds in main execution: {str(e)}", exc_info=True)
+        raise
 ```
 
 
